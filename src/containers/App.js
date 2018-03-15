@@ -4,15 +4,45 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-  state = {
-    persons: [
-      { id: 'dfdf', name: 'David', age: 28 },
-      { id: 'ere', name: 'Jasu', age: 29 },
-      { id: 'dggf', name: 'Jain', age: 26 }
-    ],
-    otherState: 'some other value',
-    showPersons: false
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      persons: [
+        { id: 'dfdf', name: 'David', age: 28 },
+        { id: 'ere', name: 'Jasu', age: 29 },
+        { id: 'dggf', name: 'Jain', age: 26 }
+      ],
+      otherState: 'some other value',
+      showPersons: false
+    }
+    console.log('[App.js] Inside Constructor()', props);
   }
+
+  componentWillMount () {
+    console.log('[App.js] Inside componentWillMount()');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()');
+  } 
+  
+  shouldComponentUpdate(nextProps, nextState) {    
+    console.log('[App.js] Inside shouldComponentUpdate()', nextProps, nextState);
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('[App.js] Inside componentWillUpdate()', nextProps, nextState);
+  }
+
+  componentDidUpdate(){
+    console.log('[App.js] Inside componentDidUpdate()');
+  }
+  
+  componentWillUnmount() {
+    console.log('[App.js] Inside componentWillUnmount()');
+  }  
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -46,6 +76,8 @@ class App extends Component {
 
   render() {
 
+    console.log('[App.js] Inside render()');
+
     let persons = null;
 
 
@@ -57,9 +89,7 @@ class App extends Component {
 
     }
 
-
-
-    return (
+    return (      
       <div className={classes.App}>
         <Cockpit
           appTitle={this.props.title}
